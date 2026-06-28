@@ -60,6 +60,28 @@ docker-compose up --build
 
 5. **React + Recharts + Vite**: Vite provides instant HMR for rapid development. Recharts renders time-series without heavy dependencies. The custom `useWebSocket` hook handles auto-reconnect and ping/pong for production resilience.
 
+
+### Scaling Path to 1M+ Devices
+
+| Bottleneck              | Current                            | At Scale                                                                             |
+| ----------------------- | ---------------------------------- | ------------------------------------------------------------------------------------ |
+| **Database**            | SQLite (file-based, single writer) | PostgreSQL + TimescaleDB for time-series writes; read replicas for dashboard queries |
+| **Broadcast**           | In-process `ConnectionManager`     | Redis Pub/Sub for cross-server WebSocket fan-out                                     |
+| **Backend**             | Single FastAPI process             | Load-balanced pool with sticky sessions per device                                   |
+| **Telemetry ingestion** | Direct DB commit                   | Kafka/RabbitMQ buffer between devices and backend to absorb write spikes             |
+
+
+### Known Limitations
+
+1. **SQLite single-writer lock**: At >100 concurrent devices, writes queue. Switch to PostgreSQL for production.
+
+2. **No device auth**: Any client can connect as any device_id. Add JWT or mTLS for production.
+
+3. **In-memory state**: ConnectionManager lives in one process. Multiple backend servers need Redis for cross-server broadcast.
+
+4. **No telemetry retention policy**: SQLite grows unbounded. Add a cron job or TimescaleDB compression for old data.
+
+
 ## Demo
 ![img.png](img.png)
 

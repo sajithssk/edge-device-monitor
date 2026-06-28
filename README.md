@@ -59,3 +59,8 @@ docker-compose up --build
 4. **SQLite for Portability, Postgres-Ready**: The default `aiosqlite` setup requires zero infrastructure, but switching to `asyncpg` is a one-line `DATABASE_URL` change—no code changes needed.
 
 5. **React + Recharts + Vite**: Vite provides instant HMR for rapid development. Recharts renders time-series without heavy dependencies. The custom `useWebSocket` hook handles auto-reconnect and ping/pong for production resilience.
+
+## Demo
+![img.png](img.png)
+
+[Screen Recording 2026-06-28 230659.mp4](../../Videos/Screen%20Recordings/Screen%20Recording%202026-06-28%20230659.mp4)

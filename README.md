@@ -63,4 +63,8 @@ docker-compose up --build
 ## Demo
 ![img.png](img.png)
 
-[Screen Recording 2026-06-28 230659.mp4](../../Videos/Screen%20Recordings/Screen%20Recording%202026-06-28%20230659.mp4)
+
+https://github.com/user-attachments/assets/db1aced5-73df-4857-bab0-06fb6fcdbfbf
+
+
+
